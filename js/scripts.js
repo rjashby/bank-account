@@ -33,6 +33,12 @@ BankAccount.prototype.withdrawFunds = function(withdrawal) {
   }
 }
 
+BankAccount.prototype.overdrawn = function () {
+  if (this.funds < 0) {
+    return "Your account is overdrawn by " + "$" + this.funds;
+  }
+}
+
 
 // UI LOGIC
 // function disableField(val) {
@@ -42,10 +48,10 @@ BankAccount.prototype.withdrawFunds = function(withdrawal) {
 
 $(document).ready(function() {
   let myAccount = new BankAccount();
-  var disableField = function () {
-    var state = document.getElementById("deposit").value.length > 0;
-    document.getElementById("withdrawal").disabled = state;
-  }
+  // var disableField = function () {
+  //   var state = document.getElementById("deposit").value.length > 0;
+  //   document.getElementById("withdrawal").disabled = state;
+  // }
   $("form#register").submit(function(event) {
     event.preventDefault();
     const myName = $("input#name").val();
@@ -64,6 +70,7 @@ $(document).ready(function() {
     const depositAmount = parseInt($("input#deposit").val());
     myAccount.addFunds(depositAmount);
     myAccount.withdrawFunds(withdrawalAmount);
+    myAccount.overdrawn();
     $("input#withdrawal").val("");
     $("input#deposit").val("");
     $(".balance").show();
