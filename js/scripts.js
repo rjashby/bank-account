@@ -33,10 +33,19 @@ BankAccount.prototype.withdrawFunds = function(withdrawal) {
   }
 }
 
+
 // UI LOGIC
+// function disableField(val) {
+//   let myVar = document.getElementById("deposit");
+//   myVar.disabled = (val.length > 0 );
+// }
 
 $(document).ready(function() {
   let myAccount = new BankAccount();
+  var disableField = function () {
+    var state = document.getElementById("deposit").value.length > 0;
+    document.getElementById("withdrawal").disabled = state;
+  }
   $("form#register").submit(function(event) {
     event.preventDefault();
     const myName = $("input#name").val();
@@ -45,21 +54,19 @@ $(document).ready(function() {
     myAccount.addInitial(initialDeposit);
     $("input#name").val("");
     $("input#initial").val("");
-    console.log(myName);
-    console.log(initialDeposit);
-    console.log(myAccount);
+    $(".balance").show();
+    $("#myBalance").text("$" +myAccount.funds);
   })
 
   $("form#account").submit(function(event) {
     event.preventDefault();
-    const withdrawalAmount = parseInt($("input#withdrawal").val())
-    const depositAmount = parseInt($("input#deposit").val())
+    const withdrawalAmount = parseInt($("input#withdrawal").val());
+    const depositAmount = parseInt($("input#deposit").val());
     myAccount.addFunds(depositAmount);
     myAccount.withdrawFunds(withdrawalAmount);
     $("input#withdrawal").val("");
     $("input#deposit").val("");
-    console.log(withdrawalAmount);
-    console.log(depositAmount);
-    console.log(myAccount);
+    $(".balance").show();
+    $("#myBalance").text("$" +myAccount.funds);
   })
 });

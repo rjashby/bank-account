@@ -18,10 +18,10 @@
         <form id="register">
           <div class="form-group">
             <label for="">Name:</label>
-            <input type="text" name="" id="name" placeholder="Enter name here">
+            <input type="text" name="" id="name" placeholder="Enter name here" required>
             <label for="">Initial Deposit:</label>
-            <input type="text" id="initial" placeholder="Enter your initial deposit amount">
-            <button>Here is a button</button>
+            <input type="text" id="initial" placeholder="Enter your initial deposit amount" required>
+            <button>Open Your Account</button>
           </div>
         </form>
 
@@ -31,16 +31,16 @@
         <form id="account">
           <div class="form-group">
             <label for="">Deposit amount:</label>
-            <input type="text" name="" id="deposit" placeholder="Enter amount to deposit here">
+            <input type="text" name="" id="deposit" placeholder="Enter amount to deposit here" onkeyup="disableField(this.value)">
             <label for="">Withdrawal amount:</label>
             <input type="text" id="withdrawal" placeholder="Enter your withdrawal amount here">
-            <button>Here is a button</button>
+            <button>Deposit or Withdraw Funds</button>
           </div>
         </form>
       </div>
     </div>
     <div class="balance">
-      <h3>Output goes here</h3>
+      <h3>Your Balance is:</h3>
       <p id="myBalance">placeholder</p>
     </div>
     
