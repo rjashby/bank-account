@@ -46,12 +46,23 @@ BankAccount.prototype.overdrawn = function () {
 //   myVar.disabled = (val.length > 0 );
 // }
 
-$(document).ready(function() {
-  let myAccount = new BankAccount();
-  // var disableField = function () {
+ // var disableField = function () {
   //   var state = document.getElementById("deposit").value.length > 0;
   //   document.getElementById("withdrawal").disabled = state;
   // }
+
+  function disableWith() {
+    let state = document.getElementById("deposit").value.length > 0;
+    document.getElementById("withdrawal").disabled = state;
+  }
+
+  function disableDep() {
+    let state = document.getElementById("withdrawal").value.length > 0;
+    document.getElementById("deposit").disabled = state;
+  }
+
+$(document).ready(function() {
+  let myAccount = new BankAccount();
   $("form#register").submit(function(event) {
     event.preventDefault();
     const myName = $("input#name").val();
@@ -63,11 +74,11 @@ $(document).ready(function() {
     $(".balance").show();
     $("#myBalance").text("$" +myAccount.funds);
   })
-
+  
   $("form#account").submit(function(event) {
     event.preventDefault();
     const withdrawalAmount = parseInt($("input#withdrawal").val());
-    const depositAmount = parseInt($("input#deposit").val());
+    const depositAmount = parseInt($("input#deposit").val()); 
     myAccount.addFunds(depositAmount);
     myAccount.withdrawFunds(withdrawalAmount);
     myAccount.overdrawn();
@@ -75,5 +86,6 @@ $(document).ready(function() {
     $("input#deposit").val("");
     $(".balance").show();
     $("#myBalance").text("$" +myAccount.funds);
+    document.getElementById('account').reset();
   })
 });
